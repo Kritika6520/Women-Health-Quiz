@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Health Awareness Quiz</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link rel="stylesheet" href="particles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Open+Sans&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>Women's Health Awareness</h1> 
+            <!--floating particles-->
+            <div class="particles-container">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            </div>
+
+            <!--content-->
+            <div class="intro">
+                <p>Today, women are making remarkable contributions across the globe:</p>
+
+                <p>Over <strong>50%</strong> of women are leading their nations and economies.<br>
+                <strong>70%</strong> continue to manage household responsibilities.<br>
+                <strong>80%</strong> of teenage and adult girls attend school while managing monthly menstruation.</p>
+
+                <p>However, a significant number silently battle a condition called <strong>PCOS (Polycystic Ovary Syndrome)</strong>.  
+                Around <strong>1 in 5 women</strong> face PCOS — a real health challenge that brings:</p>
+
+                <ul> 
+                  <li>Unexplained weight gain & hormonal imbalance</li>
+                  <li>Mood swings, anxiety & depression</li>
+                  <li>Irregular periods & fertility issues</li>
+                  <li>Fatigue, insomnia & low energy</li>
+                  <li>Risk of diabetes & metabolic disorders</li>
+                </ul>
+
+                <p>Sadly, many people aren't even aware of this syndrome.  
+                That’s why we created this short quiz — to spread awareness & spark conversations.</p>
+
+                <button id="startQuiz" onclick="startQuiz()">Start Quiz</button>
+            </div>
+        </div>
+        
+        <!--right-image-->
+        <div class="right">
+            <img src="women.jpg" alt="WomenImage">
+        </div>
+    </div>
+
+    <!--startquiz js-->
+    <script>
+        function startQuiz() {
+            window.location.href = "questions.html";  
+        }
+    </script>
+</body>
+</html>

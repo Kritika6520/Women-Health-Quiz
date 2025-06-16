@@ -1,0 +1,131 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="particles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fff0f5;
+            padding: 20px;
+            background: url('bg.jpg.png') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            height: 100vh;
+            margin: 0;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+        .result-container {
+            position: relative;
+            z-index: 1;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            backdrop-filter: blur(8px);
+            z-index: -1;
+        }
+        h1 {
+            color: #ffffff;
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            justify-items: center;
+            margin-top: 30px;
+        }
+        .result-box {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            width: 300px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .result-box:hover {
+            transform: scale(1.05);
+        }
+        p {
+            margin: 10px 0;
+            font-size: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Quiz Results & Explanations</h1>
+    <h3 id="score"></h3>
+     <div class="particles-container">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            </div>
+
+    <div class="grid-container" id="resultContainer"></div>
+
+    <script>
+        const score = localStorage.getItem("quizScore");
+        const questions = JSON.parse(localStorage.getItem("quizData"));
+
+        document.getElementById("score").innerText = `Your Score: ${score}/${questions.length}`;
+
+        const explanations = [ 
+        "PCOS affects the ovaries' ability to release eggs regularly due to hormonal imbalances, especially involving androgens and insulin levels.",
+        "Testosterone, though called a 'male hormone,' is elevated in PCOS women, leading to symptoms like hair growth, acne, and irregular periods.",
+        "PCOS often causes weight gain, acne, and hair loss because of metabolic disturbances, insulin resistance, and androgen excess.",
+        "Studies estimate around 1 in 5 women globally experience PCOS, but many remain undiagnosed due to lack of awareness.",
+        "PCOS increases insulin resistance, making the body process sugar improperly, which raises the risk of type 2 diabetes over time.",
+        "Early signs like irregular menstruation, facial hair, and adult acne are often overlooked, delaying diagnosis and management.",
+        "A combination of balanced diet, regular exercise, stress management, and sleep regulation can greatly reduce PCOS symptoms and complications.",
+        "Uncontrolled PCOS increases long-term risk of developing diabetes due to persistent insulin resistance and impaired glucose tolerance.",
+        "Insulin resistance is central in PCOS — it worsens blood sugar control, promotes fat storage, and disturbs hormone regulation.",
+        "A gynecologist specializes in female reproductive health and can diagnose PCOS through medical history, symptoms, blood tests, and ultrasound.",
+        "Vitamin D deficiency is often found in women with PCOS and may worsen insulin resistance and inflammation, though research is ongoing.",
+        "PCOS cannot be fully cured but proper lifestyle changes, medications, and hormonal therapies help manage symptoms and prevent complications.",
+        "Stress triggers the release of cortisol and affects other hormones, making PCOS symptoms like irregular periods, weight gain, and acne worse.",
+        "PCOS can interfere with ovulation, making it harder to conceive naturally, but many women conceive successfully with proper medical support.",
+        "Good quality sleep helps regulate hormones like insulin, cortisol, and reproductive hormones, which directly impacts PCOS symptom control.",
+        "Detecting PCOS early allows better lifestyle changes, preventing serious issues like diabetes, heart problems, and infertility later."];
+
+        const resultContainer = document.getElementById("resultContainer");
+
+        questions.forEach((q, index) => {
+            const box = document.createElement("div");
+            box.className = "result-box";
+            box.innerHTML = `
+                <p><strong>Q${index + 1}:</strong><br> ${q.question}</p>
+                <p><strong>Ans:</strong> ${q.answer}</p>
+                <p><strong>Why:</strong> ${explanations[index]}</p>
+            `;
+            resultContainer.appendChild(box);
+        });
+
+        localStorage.clear();
+    </script>
+
+</body>
+</html>

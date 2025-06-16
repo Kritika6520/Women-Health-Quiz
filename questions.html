@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Health Awareness Quiz</title>
+    <link rel="stylesheet" href="particles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('bg.jpg.png') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('bg.jpg.png') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        .flashcard {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #d63384;
+        }
+
+        .option {
+            display: block;
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .option:hover {
+            background-color: #ffd6e5;
+        }
+
+        .option-btn {
+            margin: 10px;
+            padding: 15px 25px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            background-color: #d63384;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .flashcard {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .nav-btn {
+            background-color: #d63384;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: #b02068;
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 300px;
+            z-index: -1;
+            filter: blur(8px);  
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="particles-container">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="main-wrapper">
+        <div class="flashcard">
+            <h2 id="question">Loading Question...</h2>
+            <div id="options"></div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="prevQuestion()">&#8592;</button>
+            <button class="nav-btn" onclick="nextQuestion()">&#8594;</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "What does PCOS stand for?", options: ["Polycystic Ovary Syndrome", "Primary Cervical Ovarian Syndrome", "Postmenstrual Cystic Ovaries", "Poly Ovarian Swelling"], answer: "Polycystic Ovary Syndrome" },
+            { question: "Which hormone is often elevated in PCOS?", options: ["Estrogen", "Testosterone", "Progesterone", "Insulin"], answer: "Testosterone" },
+            { question: "Which of these is a common symptom of PCOS?", options: ["Weight gain", "Hair loss", "Acne", "All of the above"], answer: "All of the above" },
+            { question: "How many women are affected by PCOS?", options: ["1 in 2", "1 in 3", "1 in 5", "1 in 10"], answer: "1 in 5" },
+            { question: "PCOS can increase the risk of which condition?", options: ["Diabetes", "Osteoporosis", "Thyroid cancer", "Asthma"], answer: "Diabetes" },
+            { question: "Which of the following can be a possible sign of PCOS that's often ignored?", options: ["Irregular periods", "Unwanted facial hair growth", "Sudden acne in adulthood", "All of the above"], answer: "All of the above" },
+            { question: "Which lifestyle factor can help manage PCOS symptoms?", options: ["Balanced diet & exercise", "Skipping meals to lose weight", "Taking random supplements", "Completely avoiding fats"], answer: "Balanced diet & exercise" },
+            { question: "PCOS increases the risk of which serious long-term health problem?", options: ["Diabetes", "Cancer", "Osteoporosis", "Dengue"], answer: "Diabetes" },
+            { question: "What role does insulin resistance play in PCOS?", options: ["It causes irregular blood sugar levels", "It increases fat storage in body", "It triggers hormonal imbalance", "All of the above"], answer: "All of the above" },
+            { question: "Which professional should you consult if you suspect PCOS?", options: ["Gynecologist", "Cardiologist", "Dentist", "Dermatologist"], answer: "Gynecologist" },
+            { question: "Which vitamin deficiency is common in women with PCOS?", options: ["Vitamin A", "Vitamin D", "Vitamin K", "Vitamin C"], answer: "Vitamin D" },
+            { question: "Which type of exercise is recommended for PCOS?", options: ["Strength training & cardio", "Only yoga", "Only dieting", "None of these"], answer: "Strength training & cardio" },
+            { question: "Which of these can worsen PCOS symptoms?", options: ["Stress", "Unbalanced sleep", "High sugar diet", "All of the above"], answer: "All of the above" },
+            { question: "Can PCOS affect pregnancy?", options: ["Yes, may reduce fertility", "No, not related", "Always leads to infertility", "Pregnancy cures PCOS"], answer: "Yes, may reduce fertility" },
+            { question: "Which is NOT a treatment option for PCOS?", options: ["Healthy lifestyle changes", "Medication for hormones", "Ignoring the problem", "Fertility treatments if needed"], answer: "Ignoring the problem" },
+            { question: "At what age can PCOS symptoms start showing?", options: ["Only after 40", "In teenage years", "Only during menopause", "Only after pregnancy"], answer: "In teenage years" }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById("question").innerText = q.question;
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+
+            q.options.forEach(option => {
+                const btn = document.createElement("div");
+                btn.classList.add("option");
+                btn.innerText = option;
+                btn.onclick = () => checkAnswer(option);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected) {
+            const correct = questions[currentQuestion].answer;
+            if (selected === correct) {
+                score++;
+            }
+            setTimeout(() => {
+                nextQuestion();
+            }, 400);
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            localStorage.setItem("quizScore", score);
+            localStorage.setItem("quizData", JSON.stringify(questions));
+            window.location.href = "result.html";
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
